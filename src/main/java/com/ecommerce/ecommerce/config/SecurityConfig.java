@@ -40,12 +40,12 @@ public class SecurityConfig {
                   .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
                   .requestMatchers(HttpMethod.GET, "/category/**").permitAll()
                   .requestMatchers(HttpMethod.GET, "/images/**").permitAll()
-                  .requestMatchers(HttpMethod.POST, "/product/**").hasRole("ADMIN")
-                  .requestMatchers(HttpMethod.PUT, "/product/**").hasRole("ADMIN")
-                  .requestMatchers(HttpMethod.DELETE, "/product/**").hasRole("ADMIN")
-                  .requestMatchers(HttpMethod.POST, "/category/**").hasRole("ADMIN")
-                  .requestMatchers(HttpMethod.PUT, "/category/**").hasRole("ADMIN")
-                  .requestMatchers(HttpMethod.DELETE, "/category/**").hasRole("ADMIN")
+                  .requestMatchers(HttpMethod.POST, "/product/**").hasAnyRole("ADMIN", "MODERATOR")
+                  .requestMatchers(HttpMethod.PUT, "/product/**").hasAnyRole("ADMIN", "MODERATOR")
+                  .requestMatchers(HttpMethod.DELETE, "/product/**").hasAnyRole("ADMIN", "MODERATOR")
+                  .requestMatchers(HttpMethod.POST, "/category/**").hasAnyRole("ADMIN", "MODERATOR")
+                  .requestMatchers(HttpMethod.PUT, "/category/**").hasAnyRole("ADMIN", "MODERATOR")
+                  .requestMatchers(HttpMethod.DELETE, "/category/**").hasAnyRole("ADMIN", "MODERATOR")
                   .requestMatchers("/user/**").hasRole("ADMIN")
                   .requestMatchers("/cart/**").authenticated()
                   .requestMatchers("/order/**").authenticated()
@@ -61,7 +61,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
-            "http://localhost:5173, https://tienda-jope.vercel.app/"
+            "http://localhost:5173"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));

@@ -1,5 +1,8 @@
 package com.ecommerce.ecommerce.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,5 +39,14 @@ public class UserController {
     public ResponseEntity<?> updateUserRole(@RequestBody @Valid UserRoleUpdateDto userRoleUpdateDto) {
         userService.updateUserRole(userRoleUpdateDto);
         return ResponseEntity.ok("Rol actualizado correctamente.");
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.getAllUsers().stream()
+            .map(userMapper::userToUserDto)
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(users);
     }
 }

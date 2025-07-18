@@ -34,6 +34,12 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser() {
+        UserDto userDto = userMapper.userToUserDto(userService.getLoggingUser());
+        return ResponseEntity.ok(userDto);
+    }
+    
     @PatchMapping("/role")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateUserRole(@RequestBody @Valid UserRoleUpdateDto userRoleUpdateDto) {

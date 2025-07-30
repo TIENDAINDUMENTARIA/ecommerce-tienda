@@ -5,7 +5,7 @@ import java.util.List;
 import com.ecommerce.ecommerce.dto.cartitem.CartItemDto;
 
 public record CartDto(
-    Long id,
+    Long id_cart,
     Double totalPrice,
     List<CartItemDto> items
 

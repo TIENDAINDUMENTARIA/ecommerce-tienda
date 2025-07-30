@@ -49,7 +49,7 @@ public class SecurityConfig {
                   .requestMatchers("/user/me").authenticated() // Permitir acceso autenticado a /user/me
                   .requestMatchers("/user/all").hasRole("ADMIN") // Restringir /user/all a ADMIN
                   .requestMatchers("/user/role").hasRole("ADMIN") //
-                  .requestMatchers("/cart/**").authenticated()
+                  .requestMatchers("/carts/**").authenticated()
                   .requestMatchers("/order/**").authenticated()
                   .anyRequest().authenticated()
             )
